@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon index.js"
+    "start": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "mocha"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
@@ -20,5 +21,10 @@
     "nconf": "^0.8.4",
     "nodemon": "^1.11.0",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.2.0"
   }
 }

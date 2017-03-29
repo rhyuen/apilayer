@@ -36,7 +36,7 @@ app.use(morgan("dev"));
 app.use("/", routes);
 app.use("/api", apiRoutes);
 
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
   res.redirect("/");
 });
 

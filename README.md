@@ -1,11 +1,24 @@
-*** API for Data Scraped from News Sites.
+***API for Data Scraped from News Sites.
 
-*** INSTALL
+***INSTALL
 
 > npm install
 
-*** RUN LOCALLY
+***RUN LOCALLY
 
 > npm start
 
 > Go to localhost:5367
+
+
+***TESTING
+
+> npm test
+
+***DOCS
+
+> /api/news/:NEWS_SOURCE
+
+>  NEWS_SOURCE = vsun
+
+>  NEWS_SOURCE = province
