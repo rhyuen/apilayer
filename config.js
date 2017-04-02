@@ -14,14 +14,14 @@ module.exports = {
     db: process.env.test_db || nconf.get("test:db"),
     cookieSecret: process.env.test_cookieSecret || nconf.get("cookieSecret"),
   },
-  dev: {
-    jwtsecret: process.env.dev_jwtsecret || nconf.get("dev:jwtsecret"),
-    db: process.env.dev_db || nconf.get("dev:db"),
-    cookieSecret: process.env.dev_cookieSecret || nconf.get("dev:cookieSecret"),
+  development: {
+    jwtsecret: process.env.dev_jwtsecret || nconf.get("development:jwtsecret"),
+    db: process.env.dev_db || nconf.get("development:db"),
+    cookieSecret: process.env.dev_cookieSecret || nconf.get("development:cookieSecret"),
   },
-  prod: {
-    jwtsecret: process.env.prod_jwtsecret || nconf.get("prod:jwtsecret"),
-    db: process.env.prod_db || nconf.get("prod:db"),
-    cookieSecret: process.env.prod_cookieSecret || nconf.get("prod:cookieSecret"),
+  production: {
+    jwtsecret: process.env.prod_jwtsecret || nconf.get("production:jwtsecret"),
+    db: process.env.prod_db || nconf.get("production:db"),
+    cookieSecret: process.env.prod_cookieSecret || nconf.get("production:cookieSecret"),
   }
 };

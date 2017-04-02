@@ -8,8 +8,8 @@ module.exports = () => {
       reconnectTries: Number.MAX_VALUE
     }
   };
-  
-  mongoose.connect(config.db, mongooseServerOptions, (err) => {
+
+  mongoose.connect(config[process.env.NODE_ENV].db, mongooseServerOptions, (err) => {
     if(err){
       console.error("[%s] DB CONN ERROR: %s", new Date().toLocaleString(), err);
     }else{

@@ -13,9 +13,6 @@ describe("Unauthenticated Routes return 200", () => {
         should.not.exist(err);
         res.status.should.equal(200);
         res.should.be.a("object");
-        res.type.should.be("text/html");
-
-        //res.type.should("text/html");
         done();
       });
   });
@@ -26,7 +23,6 @@ describe("Unauthenticated Routes return 200", () => {
       .end((err, res) => {
         should.not.exist(err);
         res.status.should.equal(200);
-        //res.type.should("text/html");
         done();
       });
   });
@@ -61,6 +57,14 @@ describe("Unauthenticated Routes return 200", () => {
         res.status.should.equal(200);
         //res.type.should("text/html");
         done();
+      });
+  });
+
+  it("Weird routes should redirect to root", (done) => {
+    chai.request(server)
+      .get("/infinitycat")
+      .end((err, res) => {
+        should.not.exist(err);
       });
   });
 });

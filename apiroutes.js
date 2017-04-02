@@ -7,7 +7,6 @@ let router = express.Router();
 // router.use(auth.isAuthorizedViaAuthHeader);
 
 //Articles
-//News Orgs
 //Author
 //DATE RANGES
 
@@ -22,7 +21,7 @@ router.get("/news", (req, res) => {
 
 router.get("/news/vsun", (req, res) => {
   Article.find({source: "Vancouver Sun"})
-    .sort({"updatedAt.$date": -1})
+    .sort({"created_at.$date": -1})
     .limit(20)
     .exec((err, item) => {
       if(err)
@@ -39,7 +38,7 @@ router.get("/news/vsun", (req, res) => {
 
 router.get("/news/province", (req, res) => {
   Article.find({source: "Province"})
-    .sort({"updatedAt.$date": -1})
+    .sort({"created_at.$date": -1})
     .limit(20)
     .exec((err, item) => {
       if(err)
@@ -52,10 +51,6 @@ router.get("/news/province", (req, res) => {
         data: item
       });
   });
-});
-
-router.get("/", (req, res) => {
-  res.json();
 });
 
 router.get("/user", (req, res) => {
