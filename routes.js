@@ -45,7 +45,7 @@ router.post("/login", (req, res) => {
         };
         const tokenPayload = {
           username: foundUser.name,
-          jti: "1234", //SOME UNIQUE NUMBER,
+          jti: Math.floor(Math.random()*1000).toString(), //SOME UNIQUE NUMBER,
           iat: Math.floor(Date.now()/1000)
         };
         jwt.sign(tokenPayload, config[process.env.NODE_ENV].jwtsecret, tokenOptions, (err, token) => {
@@ -72,7 +72,7 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/access", (req, res) => {
-  //
+  //Do stuff
 });
 
 router.get("/setup", (req, res) => {

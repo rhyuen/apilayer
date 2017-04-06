@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "mocha"
+    "prod": "cross-env NODE_ENV=production nodemon index.js",
+    "test": "cross-env NODE_ENV=test mocha"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",

@@ -54,7 +54,29 @@ router.get("/news/province", (req, res) => {
 });
 
 router.get("/user", (req, res) => {
-  res.json();
+  //Return page with get new key
+  //Add button to get new key and regen key
+  //Close Acct
+
+  res.status(200).json({src: "/user", description: "User Profile Page"});
+});
+
+router.get("/user/key", (req, res) => {
+  let generatedKey = "asdfjkl";
+  //Save Generated Key into DB?
+  res.status(200).json({
+    key: generatedKey
+  });
+});
+router.post("/user/close", (req, res) => {
+  User.delete({username: "MyUsername"}, (err) => {
+    if(err){
+      console.error(err);
+      res.json({src: "/user/close", message: "Error", description: "Failed to delete user."});
+    }else{
+      res.status(200).json({src: "/user/close", message: "Success.", description: "Account deleted."});
+    }
+  });
 });
 
 
