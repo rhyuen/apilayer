@@ -95,6 +95,7 @@ describe("Accounts", () => {
     });
 
 
+    //TEST that you get a cookie.
     it("/LOGIN, via HTTP, LOGIN", (done) => {
       chai.request(server)
         .post("/login")
@@ -104,6 +105,7 @@ describe("Accounts", () => {
             res.body.action.should.eql("LOGIN");
             res.body.message.should.eql("Authentication success");
             res.body.description.should.eql("Expires in an hour.");
+            res.should.have.cookie("apilayer_token");
             done();
         });
     });
@@ -131,40 +133,76 @@ describe("Accounts", () => {
           done();
         });
     });
+
+
+
+    // it("/LOGOUT, should logout, should not have cookie", (done) => {
+    //   let agent = chai.request.agent(server);
+    //   agent.post("login")
+    //     .send({username: "TestAccount9999", password: "TestPassword9999"})
+    //     .then((res) => {
+    //       res.body.action.should.eql("LOGIN");
+    //       res.body.message.should.eql("Authentication success");
+    //       res.body.description.should.eql("Expires in an hour.");
+    //       res.should.have.cookie("apilayer_token");
+    //
+    //       return agent.get("/logout")
+    //         .then((res) => {
+    //           should.not.exist(res.cookie);
+    //           done();
+    //         });
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // });
 });
 
-describe("API__NEWS__ROUTES", () => {
-  it("/api/news/vsun", (done) => {
+// describe("API__NEWS__ROUTES", () => {
+//   it("/api/news/vsun", (done) => {
+//     chai.request(server)
+//       .get("/api/news/vsun")
+//       .end((err, res) => {
+//         should.not.exist(err);
+//         res.status.should.equal(200);
+//         res.body.should.be.a("object");
+//         res.body.should.have.property("src");
+//         res.body.should.have.property("count");
+//         res.body.should.have.property("status");
+//         res.body.should.have.property("timestamp");
+//         res.body.should.have.property("data");
+//         res.body.data.should.be.an("array");
+//         done();
+//       });
+//   });
+//
+//   it("/api/news/province", (done) => {
+//     chai.request(server)
+//       .get("/api/news/province")
+//       .end((err, res) => {
+//         should.not.exist(err);
+//         res.status.should.equal(200);
+//         res.body.should.have.property("src");
+//         res.body.should.have.property("count");
+//         res.body.should.have.property("status");
+//         res.body.should.have.property("timestamp");
+//         res.body.should.have.property("data");
+//         res.body.data.should.be.an("array");
+//
+//         done();
+//       });
+//   });
+//
+// });
+
+describe("GET_API_KEY", () => {
+  it("/user/key", (done) =>{
     chai.request(server)
-      .get("/api/news/vsun")
+      .post("/user/key")
       .end((err, res) => {
         should.not.exist(err);
-        res.status.should.equal(200);
-        res.body.should.be.a("object");
-        res.body.should.have.property("src");
-        res.body.should.have.property("count");
-        res.body.should.have.property("status");
-        res.body.should.have.property("timestamp");
-        res.body.should.have.property("data");
-        res.body.data.should.be.an("array");
-        done();
-      });
-  });
-
-  it("/api/news/province", (done) => {
-    chai.request(server)
-      .get("/api/news/province")
-      .end((err, res) => {
-        should.not.exist(err);
-        res.status.should.equal(200);
-        res.body.should.have.property("src");
-        res.body.should.have.property("count");
-        res.body.should.have.property("status");
-        res.body.should.have.property("timestamp");
-        res.body.should.have.property("data");
-        res.body.data.should.be.an("array");
-
-        done();
+        res.description.should.be.eql("SUCCESS");
+        res.apiKey.should.a("string");
       });
   });
 });

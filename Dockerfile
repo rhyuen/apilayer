@@ -1,2 +1,6 @@
-FROM node:6.9.0-alpine
+FROM mhart/alpine-node:latest
 MAINTAINER rhyuen
+COPY ./package.json ./
+RUN npm install
+COPY ./ ./
+CMD ["npm", "start"]

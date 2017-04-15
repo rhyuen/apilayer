@@ -4,16 +4,27 @@
 
 > npm install
 
+> yarn install
+
 ***RUN LOCALLY
 
 > npm start
 
+> yarn start
+
 > Go to localhost:5367
 
+***DOCKER
+
+> docker build -t apilayer .
 
 ***TESTING
 
 > npm test
+
+OR
+
+> yarn test
 
 ***DOCS
 

@@ -40,7 +40,7 @@ router.post("/login", (req, res) => {
         });
       }else{
         const tokenOptions = {
-          issuer: "API SERVER",
+          issuer: "AUTH SERVER",
           expiresIn: "10h"
         };
         const tokenPayload = {
@@ -63,7 +63,8 @@ router.post("/login", (req, res) => {
           res.status(200).json({
             action: "LOGIN",
             message: "Authentication success",
-            description: "Expires in an hour."
+            description: "Expires in an hour.",
+            token: token
           });
         });
       }
@@ -71,8 +72,9 @@ router.post("/login", (req, res) => {
   });
 });
 
+//Grant the Access Token, after having been granted the Refresh Token.
 router.post("/access", (req, res) => {
-  //Do stuff
+
 });
 
 router.get("/setup", (req, res) => {
@@ -113,7 +115,11 @@ router.get("/error", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-
+  res.cookie("id_token", "LOGGEDOUT", {
+      expires: new Date(Date.now() - 36000),
+      httpOnly: true
+    });
+  res.redirect("/");
 });
 
 module.exports = router;

@@ -14,6 +14,7 @@ const cookieParser = require("cookie-parser");
 const config = require("./config.js");
 const routes = require("./routes.js");
 const User = require("./models/user.js");
+const userRoutes = require("./userroutes.js");
 const apiRoutes = require("./apiroutes.js");
 require("./dbconn.js")();
 
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 app.use("/", routes);
+app.use("/user", userRoutes);
 app.use("/api", apiRoutes);
 
 app.get("/*", (req, res) => {
