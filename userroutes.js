@@ -44,9 +44,8 @@ router.post("/key", (req, res) => {
     iat: Math.floor(Date.now()/1000)
   };
 
-  //Save the Token to the DB? so you can get it for future usage.
-
-  jwt.sign(tokenPayload, config[process.env.NODE_ENV].jwtsecret, tokenOptions, (err, token) => {
+  //Save the Token to the DB. so USER can get it for future usage.
+  jwt.sign(tokenPayload, config[process.env.NODE_ENV].apiKeySecret, tokenOptions, (err, token) => {
     if(err){
       return res.status(500).send({description: "ERROR: " + err});
     }else{
@@ -57,7 +56,7 @@ router.post("/key", (req, res) => {
           //userWithUpdatedKey doesn't seem to return anything.
           return res.status(200).send({
             description: "SUCCESS",
-            token: token,
+            apiKey: token,
           });
         }
       });

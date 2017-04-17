@@ -3,16 +3,23 @@
 const jwt = require("jsonwebtoken");
 const config = require("./config.js");
 
-
- exports.isAuthorizedViaAuthHeader = (req, res, next) => {
-     const token = req.body.token || req.query.token ||req.headers["x-access-token"] || req.headers["Authorization"];
+exports.isAuthorizedViaAuthHeader = (req, res, next) => {
+     const token = req.body.token || req.query.token || req.headers.authorization;
      if(token){
        jwt.verify(token, config[process.env.NODE_ENV].jwtsecret, (err, decoded) => {
          if(err)
            if(err.name === "TokenExpiredError"){
-             return res.json({success: false, message: err.message, expiredAt: err.expiredAt});
+             return res.json({
+               success: false,
+               message: err.message,
+               expiredAt: err.expiredAt
+             });
            }else{
-             return res.json({success: false, message: "Token Auth Failed"});
+             return res.json({
+               success: false,
+               message: "User Login via Query/Auth Header Failed",
+               suggestions: "Incorrect signing key used?"
+             });
            }
          else{
            req.decoded = decoded;
@@ -30,16 +37,25 @@ const config = require("./config.js");
 
 
 exports.isValidAPIKey = (req, res, next) => {
-  const token = req.headers["Authorization"] || req.body.token ;
+  const token = req.headers.authorization || req.query.token;
   if(token){
     jwt.verify(token, config[process.env.NODE_ENV].apiKeySecret, (err, decoded) => {
-      if(err)
+      if(err){
         if(err.name === "TokenExpiredError"){
-          return res.json({success: false, message: err.message, expiredAt: err.expiredAt});
+          return res.json({
+            success: false,
+            message: err.message,
+            expiredAt: err.expiredAt
+          });
         }else{
-          return res.json({success: false, message: "Token Auth Failed"});
+          return res.json({
+            success: false,
+            message: "Token Auth for API Failed.",
+            description: "Invalid token was presented.",
+            suggestions: "Incorrect Signing key used."
+          });
         }
-      else{
+      }else{
         req.decoded = decoded;
         next();
       }
