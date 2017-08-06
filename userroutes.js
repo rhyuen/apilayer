@@ -7,6 +7,14 @@ const router = express.Router();
 
 router.use(Auth.isAuthorizedViaAuthHeader);
 
+router.use((req, res, next) => {
+  res.set({
+    "Content-Type":"application/json; charset=utf-8",
+    "Encoding": "utf8"
+  });
+  next();
+});
+
 router.get("/", (req, res) => {
   res.status(200).json({
     src: "/user",
@@ -34,6 +42,7 @@ router.get("/key", (req, res) => {
 
 //GET NEW KEY for FIRST TIME
 router.post("/key", (req, res) => {
+
   const tokenOptions = {
     issuer: "API SERVER",
     expiresIn: "720h"
@@ -54,7 +63,7 @@ router.post("/key", (req, res) => {
           return console.error("Error things");
         }else{
           //userWithUpdatedKey doesn't seem to return anything.
-          return res.status(200).send({
+          return res.status(200).json({
             description: "SUCCESS",
             apiKey: token,
           });
@@ -68,9 +77,17 @@ router.post("/close", (req, res) => {
   User.delete({username: "MyUsername"}, (err) => {
     if(err){
       console.error(err);
-      res.json({src: "/user/close", message: "Error", description: "Failed to delete user."});
+      res.json({
+        src: "/user/close",
+        message: "Error",
+        description: "Failed to delete user."
+      });
     }else{
-      res.status(200).json({src: "/user/close", message: "Success.", description: "Account deleted."});
+      res.status(200).json({
+        src: "/user/close",
+        message: "Success.",
+        description: "Account deleted."
+      });
     }
   });
 });

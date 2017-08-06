@@ -1,0 +1,11 @@
+{
+    "name": "ryinewslib",
+    "alias": [
+        "ryinewslib"
+    ],
+    "engine": {
+        "node": "^8.1.4"
+    },
+    "public": true,
+    "type": "npm"
+}

@@ -33,6 +33,15 @@ describe("Unauthenticated Routes return 200", () => {
   }
 });
 
+describe("Authenticated routes should return FORBIDDEN(403)", () => {
+  //USER
+  //RESET
+  //USER/KEY
+  it("Should return 403", () => {
+
+  });
+});
+
 describe("Accounts", () => {
     // before((done) => {
     //   mongoose.connect(config[process.env.NODE_ENV].db);
@@ -198,8 +207,12 @@ describe("Accounts", () => {
 describe("GET_API_KEY", () => {
   it("/user/key", (done) =>{
     chai.request(server)
+      //.set("authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhdCIsImlhdCI6MTQ5MjM4NzkxNywiZXhwIjoxNDk0OTc5OTE3LCJpc3MiOiJBUEkgU0VSVkVSIn0.In58QCy2pBSMdlQNZMwEo-neHOALrgZl0w-8DIbtpso")
       .post("/user/key")
+      .field("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhdCIsImlhdCI6MTQ5MjM4NzkxNywiZXhwIjoxNDk0OTc5OTE3LCJpc3MiOiJBUEkgU0VSVkVSIn0.In58QCy2pBSMdlQNZMwEo-neHOALrgZl0w-8DIbtpso")
       .end((err, res) => {
+        if(err)
+          console.error(err);
         should.not.exist(err);
         res.description.should.be.eql("SUCCESS");
         res.apiKey.should.a("string");

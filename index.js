@@ -2,6 +2,10 @@
 
 const server = require("./server.js");
 
+process.on("UncaughtError", (err) => {
+  console.log("UNCAUGHT ERROR: %s", err);
+});
+
 server.listen(server.get("PORT"), (err) => {
   if(err){
     console.error("ERROR: %s", err);

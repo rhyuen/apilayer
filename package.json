@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "cross-env NODE_ENV=development nodemon index.js ",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
     "prod": "cross-env NODE_ENV=production nodemon index.js",
     "test": "cross-env NODE_ENV=test mocha"
   },
@@ -22,11 +23,15 @@
     "nconf": "^0.8.4",
     "nodemon": "^1.11.0",
     "path": "^0.12.7",
-    "validator": "^7.0.0"
+    "serve-static": "^1.12.3",
+    "validator": "^7.0.0",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
     "mocha": "^3.2.0"
   }
 }

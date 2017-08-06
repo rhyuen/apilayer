@@ -6,6 +6,13 @@ let router = express.Router();
 
 
 router.use(auth.isValidAPIKey);
+router.use((req, res, next) => {
+  res.set({
+    "Content-Type":"application/json; charset=utf-8",
+    "Encoding": "utf8"
+  });
+  next();
+});
 
 //Articles
 //Author

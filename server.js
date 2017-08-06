@@ -10,13 +10,14 @@ const mongoose = require("mongoose");
 const helmet = require("helmet");
 const compression = require("compression");
 const cookieParser = require("cookie-parser");
-
 const config = require("./config.js");
 const routes = require("./routes.js");
 const User = require("./models/user.js");
 const userRoutes = require("./userroutes.js");
 const apiRoutes = require("./apiroutes.js");
+require("./logger.js");
 require("./dbconn.js")();
+
 
 app.set("PORT", process.env.PORT|| 5367);
 

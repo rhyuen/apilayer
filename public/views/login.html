@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      html{
+        
+      }
+      body{
+        
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div class = "nav">       
+      <a href = "/">Home</a>
+      <a href = "/documentation">Documentation</a>
+      <a href = "/login">Login</a>      
+    </div>    
+    
+    <div class = "main">        
+        <div>
+            <input type = "text" placeholder="username" name = "username"/>
+            <input type = "text" placeholder="password" name = "password"/>
+        </div>    
+    </div>
+    
+    <script type = "text/javascript">
+        const options = {
+            method: "POST"
+        };
+
+        fetch("/login", options)
+        .then((res) => {
+            return res.json();
+        })
+        .then((res) => {
+            console.log(res);
+        });
+    </script>
+  </body>
+</html>
